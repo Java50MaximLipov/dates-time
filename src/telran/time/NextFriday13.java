@@ -14,18 +14,18 @@ public class NextFriday13 implements TemporalAdjuster {
 			throw new UnsupportedTemporalTypeException("must support years");
 		}
 		if (temporal.get(ChronoField.DAY_OF_MONTH) == 13) {
-			return temporal = monthPlus(temporal);
+			return temporal = nextMonth(temporal);
 		}
 		do {
 			temporal = temporal.plus(1, ChronoUnit.DAYS);
 		} while (temporal.get(ChronoField.DAY_OF_MONTH) != 13);
 		if (temporal.get(ChronoField.DAY_OF_WEEK) != 5) {
-			temporal = monthPlus(temporal);
+			temporal = nextMonth(temporal);
 		}
 		return temporal;
 	}
 
-	private Temporal monthPlus(Temporal temporal) {
+	private Temporal nextMonth(Temporal temporal) {
 		do {
 			temporal = temporal.plus(1, ChronoUnit.MONTHS);
 		} while (temporal.get(ChronoField.DAY_OF_WEEK) != 5);
