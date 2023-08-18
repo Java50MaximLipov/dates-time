@@ -6,11 +6,10 @@ import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.UnsupportedTemporalTypeException;
 
 public class BarMizvaAdjuster implements TemporalAdjuster {
-
 	@Override
 	public Temporal adjustInto(Temporal temporal) {
 		if (!temporal.isSupported(ChronoUnit.YEARS)) {
-			throw new UnsupportedTemporalTypeException("Must support years");
+			throw new UnsupportedTemporalTypeException("must support years");
 		}
 		return temporal.plus(13, ChronoUnit.YEARS);
 	}
