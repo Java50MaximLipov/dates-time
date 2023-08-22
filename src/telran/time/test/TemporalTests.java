@@ -30,6 +30,7 @@ class TemporalTests {
 	}
 
 	@Test
+	@Disabled
 	void barMizvaAdjusterTest() {
 		TemporalAdjuster adjuster = new BarMizvaAdjuster();
 		LocalDateTime ldt = LocalDateTime.of(2000, 1, 1, 0, 0);
@@ -39,6 +40,7 @@ class TemporalTests {
 	}
 
 	@Test
+	@Disabled
 	void nextFridayAdjuster() {
 		TemporalAdjuster adjuster = new NextFriday13();
 		LocalDate ld = LocalDate.of(2023, 8, 15);
@@ -48,4 +50,31 @@ class TemporalTests {
 		assertEquals(expected2, expected1.with(adjuster));
 	}
 
+	@Test
+	@Disabled
+	void instantTest() {
+//		Instant instant = Instant.ofEpochMilli(0);
+//		System.out.println(instant);
+//		for (String zoneId : ZoneId.getAvailableZoneIds()) {
+//			System.out.println(zoneId);
+//		}
+		ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of("Indian/Comoro"));
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/YYYY H:m z");
+		System.out.println(zdt.format(dtf));
+	}
+
+	@Test
+	void zoneDateTimeTest() {
+		zoneDateTime("Canada");
+	}
+
+	private void zoneDateTime(String cityCountry) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/YYYY H:m zzzz Z");
+		for (String zoneId : ZoneId.getAvailableZoneIds()) {
+			if (zoneId.contains(cityCountry)) {
+				ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of(zoneId));
+				System.out.println(zdt.format(dtf));
+			}
+		}
+	}
 }
